@@ -1,0 +1,29 @@
+body{
+    min-height: 100vh;
+    background-image: linear-gradient( 45.6deg,  rgba(48,207,208,1) 11.2%, rgba(51,8,103,1) 92.5% );
+    padding: auto;
+    padding-top: 1rem;
+}
+
+.tc{
+    text-align: center;
+}
+
+.panel{
+    width: 30%;
+    margin: auto;
+
+    padding: 1rem;
+
+    border: 1px solid gray;
+    border-radius: .5rem;
+
+    background-color: white;
+    box-shadow: 2px 2px 15px 0px rgba(0, 0, 0,0.3);
+
+}
+
+.panel.max{
+    width: 90%;
+    height: 90vh;
+}

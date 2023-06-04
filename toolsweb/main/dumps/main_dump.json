@@ -1,0 +1,32 @@
+[
+    {
+        "model": "main.vospitanik",
+        "pk": 2,
+        "fields": {
+            "first_name": "Владислав",
+            "second_name": "Бутеев",
+            "third_name": "Сергеевич",
+            "sex": "m",
+            "birthdate": "2016-06-04",
+            "phone": "+3754487876545",
+            "live_place_full": "ул Притыцкого д.34 кв.15",
+            "region": "min",
+            "is_city": false,
+            "ped_zav_full": "ГУО Гимназия №21",
+            "ped_zav_type": "g",
+            "order_number": "12225554",
+            "order_state": "ОАО \"Рога и копыта\"",
+            "soc": "sop",
+            "soc_fam": "np",
+            "mother_name_full": "",
+            "mother_work": "",
+            "mother_post": "",
+            "mother_phone": "",
+            "father_name_full": "Сергеей Александрович Бутеев",
+            "father_work": "ОАО \"Рога и копыта\"",
+            "father_post": "Мастер рогов 3 разряда",
+            "father_phone": "+3752987004561",
+            "coment": ""
+        }
+    }
+]

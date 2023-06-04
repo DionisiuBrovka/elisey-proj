@@ -1,0 +1,23 @@
+{% extends 'root.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<div class="panel">
+    <h5><button class="btn btn-primary" onclick="history.back()">Назад</button> Импорт воспитаников</h5>
+    <hr>
+    <form action="/import/load" method="post" enctype="multipart/form-data">
+        <select name="in-otryad" id="" class="form-select mb-3">
+            
+        </select>
+
+        <select name="in-smena" id="" class="form-select mb-3">
+            
+        </select>
+
+       <input class="form-control mb-3" type="file" name="in-data" id="" accept=".xlsx">
+       <button type="submit" class="btn btn-primary">Импортировать</button>
+    </form>
+
+</div>
+{% endblock %}
