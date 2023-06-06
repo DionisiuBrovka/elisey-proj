@@ -89,6 +89,7 @@ class Vospitanik(models.Model):
     is_city = models.BooleanField(verbose_name="Сельская местность")
     ped_zav_full = models.CharField(verbose_name="Название учереждения образования", max_length=255, blank=False)
     ped_zav_type = models.CharField(verbose_name="Тип учреждения образования", choices=SEL_PEDZAVTYPE, max_length=3, blank=False)
+    state = models.PositiveIntegerField(verbose_name="Класс", blank=False, default=5)
     order_number = models.CharField(verbose_name="Номер путевки", max_length=255, blank=False)
     order_state = models.CharField(verbose_name="Кем выдана", max_length=255, blank=False)
     soc = models.CharField(verbose_name="Социальная характеристика", choices=SEL_SOC, max_length=4, blank=False)

@@ -5,7 +5,7 @@ def index_pg(request):
     if not request.user.is_authenticated:
         return redirect('/login/')
     
-    return render(request, 'index.html')
+    return redirect('/admin/')
 
 
 def login_pg(request):

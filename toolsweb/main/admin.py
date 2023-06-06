@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.shortcuts import redirect
 from .models import *
+from .data.export import export_obhchiu, export_soc, export_uchet_putevok
 
 admin.site.site_header = '"Справка и Учёт" v0.1'
 admin.site.site_title = '"Справка и Учёт" v0.1'
@@ -38,7 +40,7 @@ class VospitanikAdmin(admin.ModelAdmin):
         (
             "Информация о учебном заведении",
             {
-                'fields':["ped_zav_full","ped_zav_type"]
+                'fields':["ped_zav_full","state","ped_zav_type"]
             }
         ),
         (
@@ -92,3 +94,41 @@ class SmenaAdmin(admin.ModelAdmin):
     inlines = [
         ProfilePhotoInline
     ]
+
+    actions = ["export_obhchiu","export_soc_har","export_uchet_putevok"]
+
+    @admin.action(description="Экспорт общей таблицы смены")
+    def export_obhchiu(modeladmin, request, queryset):
+        
+        for query in queryset:
+            print("="*32)
+            print(query)
+            print(query.__dir__())
+
+            path = export_obhchiu(query)
+
+        return redirect("/media/" + path)
+    
+    @admin.action(description="Экспорт соц характеристики")
+    def export_soc_har(modeladmin, request, queryset):
+        
+        for query in queryset:
+            print("="*32)
+            print(query)
+            print(query.__dir__())
+
+            path = export_soc(query)
+
+        return redirect("/media/" + path)
+    
+    @admin.action(description="Эскспорт учета путевок")
+    def export_uchet_putevok(modeladmin, request, queryset):
+        
+        for query in queryset:
+            print("="*32)
+            print(query)
+            print(query.__dir__())
+
+            path = export_uchet_putevok(query)
+
+        return redirect("/media/" + path)
