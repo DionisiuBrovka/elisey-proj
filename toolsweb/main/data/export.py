@@ -125,3 +125,37 @@ def export_uchet_putevok(query):
 
     doc.save(MEDIA_DIR / Path(FILE_PATH_REL))
     return FILE_PATH_REL
+
+def export_obhchiu(query):
+
+    CUR_DATETIME = datetime.datetime.now()
+    FILE_PATH_REL = f"obhchie/otchet_{str(CUR_DATETIME.day)}.{str(CUR_DATETIME.month)}.{str(CUR_DATETIME.year)}_{str(random.randint(10000,99999))}.xlsx"
+
+    doc = openpyxl.load_workbook(BASE_DIR / TEMPLS_DIR / Path('obshiy.xlsx'))
+
+    ws = doc.active
+
+    start_row = 11
+    start_col = 2
+
+    row_n = start_row
+    for vospitanik in Vospitanik.objects.filter(otryad__id = query.id).filter(smena__is_current = True).order_by('-second_name'):
+        ws.cell(row = start_row, column=2).value = f"{vospitanik.order_state} №{vospitanik.order_number}"
+        ws.cell(row = start_row, column=3).value = f"{vospitanik.second_name} {vospitanik.first_name} {vospitanik.third_name}"
+
+        bd = vospitanik.birthdate.strftime("%d.%m.%Y")
+        ws.cell(row = start_row, column=4).value = f"{bd}, {vospitanik.ped_zav_full}, {vospitanik.state} класс"
+        
+        full_year = datetime.date.today() - vospitanik.birthdate
+        ws.cell(row = start_row, column=5).value = f"{str(full_year.days // 365)}"
+
+        ws.cell(row = start_row, column=6).value = f"{vospitanik.live_place_full}, {vospitanik.phone}"
+
+        ws.cell(row = start_row, column=7).value = f"{vospitanik.mother_name_full} {vospitanik.mother_work} {vospitanik.mother_post} {vospitanik.mother_phone}"
+        ws.cell(row = start_row, column=8).value = f"{vospitanik.father_name_full} {vospitanik.father_work} {vospitanik.father_post} {vospitanik.father_phone}"
+        ws.cell(row = start_row, column=9).value = f"{vospitanik.coment}"
+
+        start_row += 1
+
+    doc.save(MEDIA_DIR / Path(FILE_PATH_REL))
+    return FILE_PATH_REL

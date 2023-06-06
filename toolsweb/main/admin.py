@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.shortcuts import redirect
 from .models import *
-from .data.export import export_obhchiu, export_soc, export_uchet_putevok
+from .data.export import export_obhchiu_s, export_obhchiu, export_soc, export_uchet_putevok
 
 admin.site.site_header = '"Справка и Учёт" v0.1'
 admin.site.site_title = '"Справка и Учёт" v0.1'
@@ -73,12 +73,6 @@ class VospitanikAdmin(admin.ModelAdmin):
     search_fields = ['second_name', 'first_name','third_name']
     list_display_links = ['id','second_name', 'first_name','third_name']
 
-    # actions = ['mark_as_visible']
-
-    # @admin.action(description='Сделать видимым')
-    # def mark_as_visible(self, request, queryset):
-    #     queryset.update(is_visible=True)
-
 
 @admin.register(Otryad)
 class SmenaAdmin(admin.ModelAdmin):
@@ -86,6 +80,19 @@ class SmenaAdmin(admin.ModelAdmin):
     inlines = [
         ProfilePhotoInline
     ]
+
+    actions = ["export_obhchiu_s"]
+    @admin.action(description="Экспорт общей таблицы")
+    def export_obhchiu(modeladmin, request, queryset):
+        
+        for query in queryset:
+            print("="*32)
+            print(query)
+            print(query.__dir__())
+
+            path = export_obhchiu_s(query)
+
+        return redirect("/media/" + path)
 
 
 @admin.register(Smena)
